@@ -8708,6 +8708,7 @@ Worker.prototype.toCanvas = function toCanvas() {
     return html2canvas$1(this.prop.container, options);
   }).then(function toCanvas_post(canvas) {
     // Handle old-fashioned 'onrendered' argument.
+    canvas.crossOrigin = 'anonymous';
     var onRendered = this.opt.html2canvas.onrendered || function () {};
     onRendered(canvas);
 
@@ -8761,8 +8762,6 @@ Worker.prototype.toPdf = function toPdf() {
     pageCanvas.height = pxPageHeight;
 
     pageCanvas.crossOrigin = this.opt.crossOrigin;
-
-    // Initialize the PDF.
     this.prop.pdf = this.prop.pdf || new jspdf_min(opt.jsPDF);
 
     for (var page = 0; page < nPages; page++) {
