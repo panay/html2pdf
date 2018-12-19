@@ -46,7 +46,7 @@ Worker.template = {
   opt: {
     filename: 'file.pdf',
     margin: [0,0,0,0],
-    image: { type: 'jpeg', quality: 0.95 },
+    image: { type: 'jpeg', quality: 0.95, crossOrigin: '*' },
     enableLinks: true,
     html2canvas: {},
     jsPDF: {}
@@ -160,6 +160,7 @@ Worker.prototype.toImg = function toImg() {
     var imgData = this.prop.canvas.toDataURL('image/' + this.opt.image.type, this.opt.image.quality);
     this.prop.img = document.createElement('img');
     this.prop.img.src = imgData;
+    this.prop.img.crossOrigin = this.opt.crossOrigin;
   });
 };
 
