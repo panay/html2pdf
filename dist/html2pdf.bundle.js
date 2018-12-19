@@ -8604,8 +8604,9 @@ Worker.template = {
   opt: {
     filename: 'file.pdf',
     margin: [0, 0, 0, 0],
-    image: { type: 'jpeg', quality: 0.95, crossOrigin: '*' },
+    image: { type: 'jpeg', quality: 0.95 },
     enableLinks: true,
+    crossOrigin: 'anonymous',
     html2canvas: {},
     jsPDF: {}
   }
@@ -8741,6 +8742,8 @@ Worker.prototype.toPdf = function toPdf() {
     // Create local copies of frequently used properties.
     var canvas = this.prop.canvas;
     var opt = this.opt;
+
+    canvas.crossOrigin = this.opt.crossOrigin;
 
     // Calculate the number of pages.
     var ctx = canvas.getContext('2d');
