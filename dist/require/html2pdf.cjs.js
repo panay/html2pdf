@@ -168,7 +168,7 @@ Worker.template = {
     margin: [0, 0, 0, 0],
     image: { type: 'jpeg', quality: 0.95 },
     enableLinks: true,
-    crossOrigin: 'anonymous',
+    crossOrigin: 'Anonymous',
     html2canvas: {},
     jsPDF: {}
   }
@@ -270,7 +270,7 @@ Worker.prototype.toCanvas = function toCanvas() {
     return html2canvas(this.prop.container, options);
   }).then(function toCanvas_post(canvas) {
     // Handle old-fashioned 'onrendered' argument.
-    canvas.crossOrigin = 'anonymous';
+    canvas.crossOrigin = this.opt.crossOrigin;
     var onRendered = this.opt.html2canvas.onrendered || function () {};
     onRendered(canvas);
 
@@ -324,6 +324,8 @@ Worker.prototype.toPdf = function toPdf() {
     pageCanvas.height = pxPageHeight;
 
     pageCanvas.crossOrigin = this.opt.crossOrigin;
+
+    // Initialize the PDF.
     this.prop.pdf = this.prop.pdf || new jsPDF(opt.jsPDF);
 
     for (var page = 0; page < nPages; page++) {
