@@ -194,6 +194,8 @@ Worker.prototype.toPdf = function toPdf() {
     pageCanvas.width = canvas.width;
     pageCanvas.height = pxPageHeight;
 
+    pageCanvas.crossOrigin = this.opt.crossOrigin;
+
     // Initialize the PDF.
     this.prop.pdf = this.prop.pdf || new jsPDF(opt.jsPDF);
 
